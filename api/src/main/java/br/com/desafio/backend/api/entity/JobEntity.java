@@ -28,8 +28,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Service", uniqueConstraints = { @UniqueConstraint(columnNames = {"cateogry_id"}) })
-public class ServiceEntity implements Serializable {
+@Table(name = "Job", uniqueConstraints = { @UniqueConstraint(columnNames = {"cateogry_id"}) })
+public class JobEntity implements Serializable {
 
 	private static final long serialVersionUID = -8515263941998390820L;
 	
