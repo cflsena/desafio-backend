@@ -33,6 +33,10 @@ public class JobEntity implements Serializable {
 
 	private static final long serialVersionUID = -8515263941998390820L;
 	
+	public static JobEntity getInstance() {
+		return new JobEntity();
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")

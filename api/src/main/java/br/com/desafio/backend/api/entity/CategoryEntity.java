@@ -26,6 +26,10 @@ import lombok.Setter;
 public class CategoryEntity implements Serializable {
 
 	private static final long serialVersionUID = -1861766955648495332L;
+	
+	public static CategoryEntity getInstance() {
+		return new CategoryEntity();
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
