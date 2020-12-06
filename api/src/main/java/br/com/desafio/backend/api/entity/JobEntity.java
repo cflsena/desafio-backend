@@ -42,12 +42,12 @@ public class JobEntity implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "professional_id")
 	@ManyToOne
 	@NotNull
 	private ProfessionalEntity professional;
 	
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "category_id")
 	@ManyToOne
 	@NotNull
 	private CategoryEntity category;
