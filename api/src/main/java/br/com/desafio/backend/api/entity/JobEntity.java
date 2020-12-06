@@ -28,7 +28,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Job", uniqueConstraints = { @UniqueConstraint(columnNames = {"cateogry_id"}) })
+@Table(name = "Job", uniqueConstraints = { @UniqueConstraint(columnNames = {"category_id"}) })
 public class JobEntity implements Serializable {
 
 	private static final long serialVersionUID = -8515263941998390820L;
