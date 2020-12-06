@@ -54,7 +54,7 @@ public class JobEntity implements Serializable {
 	
 	@NotBlank
 	@Column(name = "weekend_service")
-	private String weekend_service;
+	private String weekendService;
 	
 	@NotNull
 	@Convert(converter = BooleanConverter.class)
