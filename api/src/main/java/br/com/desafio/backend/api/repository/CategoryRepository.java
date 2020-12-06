@@ -2,6 +2,8 @@ package br.com.desafio.backend.api.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CategoryRepository extends JpaRepository<CategoryRepository, Long> {
+import br.com.desafio.backend.api.entity.CategoryEntity;
+
+public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> {
 
 }
