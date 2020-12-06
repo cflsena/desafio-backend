@@ -11,23 +11,20 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
-
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Professional", uniqueConstraints = { @UniqueConstraint(columnNames = { "email", "cell_phone" }) })
 public class ProfessionalEntity implements Serializable {
 
 	private static final long serialVersionUID = -9066598081196681838L;
-	
+
 	public static ProfessionalEntity getInstance() {
 		return new ProfessionalEntity();
 	}
