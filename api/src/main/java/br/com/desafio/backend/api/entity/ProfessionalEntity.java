@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Professional", uniqueConstraints = { @UniqueConstraint(columnNames = { "email", "cell_phone" }) })
+@Table(name = "Professional")
 public class ProfessionalEntity implements Serializable {
 
 	private static final long serialVersionUID = -9066598081196681838L;
@@ -32,11 +32,11 @@ public class ProfessionalEntity implements Serializable {
 	private String name;
 
 	@NotBlank
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 	private String email;
 
 	@NotBlank
-	@Column(name = "cell_phone")
+	@Column(name = "cell_phone", unique = true)
 	@Size(min = 11, max = 11)
 	private String cellPhone;
 

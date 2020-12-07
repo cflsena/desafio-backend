@@ -1,4 +1,4 @@
-package br.com.desafio.backend.api.exception.common;
+package br.com.desafio.backend.api.exception;
 
 import br.com.desafio.backend.api.exception.common.ExceptionMessageBuilder;
 import br.com.desafio.backend.api.exception.constant.ApiResponseEntityExceptionConstant;
