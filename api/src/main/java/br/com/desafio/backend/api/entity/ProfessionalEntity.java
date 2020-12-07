@@ -16,28 +16,28 @@ import java.io.Serializable;
 @Table(name = "Professional")
 public class ProfessionalEntity implements Serializable {
 
-	private static final long serialVersionUID = -9066598081196681838L;
+    private static final long serialVersionUID = -9066598081196681838L;
 
-	public static ProfessionalEntity getInstance() {
-		return new ProfessionalEntity();
-	}
+    public static ProfessionalEntity getInstance() {
+        return new ProfessionalEntity();
+    }
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-	@NotBlank
-	@Column(name = "name")
-	private String name;
+    @NotBlank
+    @Column(name = "name")
+    private String name;
 
-	@NotBlank
-	@Column(name = "email", unique = true)
-	private String email;
+    @NotBlank
+    @Column(name = "email", unique = true)
+    private String email;
 
-	@NotBlank
-	@Column(name = "cell_phone", unique = true)
-	@Size(min = 11, max = 11)
-	private String cellPhone;
+    @NotBlank
+    @Column(name = "cell_phone", unique = true)
+    @Size(min = 11, max = 11)
+    private String cellPhone;
 
 }
