@@ -1,18 +1,11 @@
 package br.com.desafio.backend.api.entity;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotBlank;
-
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -44,7 +37,7 @@ public class ProfessionalEntity implements Serializable {
 
 	@NotBlank
 	@Column(name = "cell_phone")
-	@Length(min = 11, max = 11)
+	@Size(min = 11, max = 11)
 	private String cellPhone;
 
 }
