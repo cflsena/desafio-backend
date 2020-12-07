@@ -18,7 +18,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public abstract class GenericResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+public class GenericResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Autowired
     private ExceptionMessageBuilder exceptionMessageBuilder;
@@ -41,25 +41,6 @@ public abstract class GenericResponseEntityExceptionHandler extends ResponseEnti
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
         return handleExceptionInternal(ex, getExceptionMessageBuilder().buildErrorApi(HttpStatus.BAD_REQUEST, ex, ex.getBindingResult()),
                 headers, HttpStatus.BAD_REQUEST, request);
-    }
-
-    @ExceptionHandler({EmptyResultDataAccessException.class})
-    public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex,
-                                                                       WebRequest request) {
-        return handleExceptionInternal(ex,
-                getExceptionMessageBuilder().buildErrorApi(HttpStatus.NOT_FOUND,
-                        getExceptionMessageBuilder().getUserMessage(ApiResponseEntityExceptionConstant.RESOURCE_NOT_FOUND), ex),
-                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
-    }
-
-    @ExceptionHandler({DataIntegrityViolationException.class})
-    public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex,
-                                                                        WebRequest request) {
-        return handleExceptionInternal(ex,
-                getExceptionMessageBuilder().buildErrorApi(HttpStatus.BAD_REQUEST,
-                        getExceptionMessageBuilder().getUserMessage(ApiResponseEntityExceptionConstant.OPERATION_NOT_PERMITTED),
-                        ExceptionUtils.getRootCauseMessage(ex)),
-                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler({SystemUnavailableException.class})

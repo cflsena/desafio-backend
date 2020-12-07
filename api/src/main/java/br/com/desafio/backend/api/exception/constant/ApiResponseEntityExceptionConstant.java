@@ -5,4 +5,5 @@ public final class ApiResponseEntityExceptionConstant {
 	public static final String RESOURCE_NOT_FOUND = "resource.not.found";
 	public static final String OPERATION_NOT_PERMITTED = "operation.not.permitted";
 	public static final String SYSTEM_UNAVAILABLE = "system.unavailable";
+	public static final String UNIQUE_CONSTRAINT = "custom.validation.unique.constraint";
 }
