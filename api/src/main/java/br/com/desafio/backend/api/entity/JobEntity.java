@@ -1,12 +1,28 @@
 package br.com.desafio.backend.api.entity;
 
-import br.com.desafio.backend.api.converter.BooleanConverter;
-import lombok.*;
+import java.io.Serializable;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+
+import br.com.desafio.backend.api.controller.dto.JobRequest;
+import br.com.desafio.backend.api.converter.BooleanConverter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -15,9 +31,21 @@ import java.io.Serializable;
 @NoArgsConstructor(staticName = "create")
 @Entity
 @Table(name = "Job", uniqueConstraints = { @UniqueConstraint(columnNames = {"category_id"}) })
+@Builder
 public class JobEntity implements Serializable {
 
 	private static final long serialVersionUID = -8515263941998390820L;
+	
+	public static JobEntity from(JobRequest request) {
+		return builder()
+			.professional(request.getProfessional())
+			.category(request.getCategory())
+			.description(request.getDescription())
+			.weekendService(request.getWeekendService())
+			.active(request.getActive())
+			.references(request.getReferences())
+		.build();
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

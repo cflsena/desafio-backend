@@ -9,5 +9,6 @@ import br.com.desafio.backend.api.entity.ProfessionalEntity;
 
 @Repository
 public interface ProfessionalRepository extends JpaRepository<ProfessionalEntity, Long> {
-    Optional<ProfessionalEntity> findByCellPhoneOrEmail(String cellPhone, String email);
+    Optional<ProfessionalEntity> findByCellPhone(String cellPhone);
+    Optional<ProfessionalEntity> findByEmail(String email);
 }

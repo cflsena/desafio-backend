@@ -1,12 +1,11 @@
 package br.com.desafio.backend.api.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +29,6 @@ import io.swagger.v3.oas.annotations.Operation;
 public class CategoryController {
 
 	@Autowired
-	private ModelMapper modelMapper;
-
-	@Autowired
 	private CategoryService categoryService;
 
 	@GetMapping
@@ -41,13 +37,7 @@ public class CategoryController {
 			"category" })
 	public List<CategoryResponse> getAllCategory() {
 		List<CategoryEntity> categories = getService().findAll();
-		List<CategoryResponse> categoriesResponse = new ArrayList<CategoryResponse>();
-		categories.forEach(category -> {
-			CategoryResponse response = CategoryResponse.getInstance();
-			getModelMapper().map(category, response);
-			categoriesResponse.add(response);
-		});
-		return categoriesResponse;
+		return categories.stream().map(CategoryResponse::from).collect(Collectors.toList());
 	}
 
 	@GetMapping("/{id}")
@@ -57,8 +47,7 @@ public class CategoryController {
 		Optional<CategoryEntity> op = getService().findById(id);
 		if (op.isPresent()) {
 			CategoryEntity foundEntity = op.get();
-			CategoryResponse categoryResponse = CategoryResponse.getInstance();
-			getModelMapper().map(foundEntity, categoryResponse);
+			CategoryResponse categoryResponse = CategoryResponse.from(foundEntity);
 			return ResponseEntity.ok(categoryResponse);
 		}
 		return ResponseEntity.notFound().build();
@@ -69,13 +58,13 @@ public class CategoryController {
 	@Operation(summary = "Criar uma nova cateogria", description = "", tags = { "category" })
 	public ResponseEntity<CategoryResponse> createCategory(@Valid @RequestBody CategoryRequest category) {
 
-		CategoryEntity categoryToSave = CategoryEntity.getInstance();
-		CategoryResponse categoryResponse = CategoryResponse.getInstance();
+		CategoryEntity categoryToSave = CategoryEntity.create();
+		CategoryResponse categoryResponse = CategoryResponse.create();
 
-		getModelMapper().map(category, categoryToSave);
+		categoryToSave.setDescription(category.getDescription());
 		Object ojb = getService().save(categoryToSave);
 		CategoryEntity categoryCreated = (CategoryEntity) ojb;
-		getModelMapper().map(categoryCreated, categoryResponse);
+		categoryResponse = CategoryResponse.from(categoryCreated);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(categoryResponse);
 	}
@@ -85,17 +74,13 @@ public class CategoryController {
 	@Operation(summary = "Atualizar a descrição da categoria pelo id", description = "", tags = { "category" })
 	public ResponseEntity<CategoryResponse> updateCategory(@PathVariable("id") Long id,
 			@Valid @RequestBody CategoryRequest category) {
-		CategoryEntity categoryToUpdate = CategoryEntity.getInstance();
-		CategoryResponse categoryResponse = CategoryResponse.getInstance();
-		getModelMapper().map(category, categoryToUpdate);
+		CategoryEntity categoryToUpdate = CategoryEntity.create();
+		CategoryResponse categoryResponse = CategoryResponse.create();
+		categoryToUpdate.setDescription(category.getDescription());
 		Object obj = getService().update(categoryToUpdate, id);
 		CategoryEntity categoryUpdated = (CategoryEntity) obj;
-		getModelMapper().map(categoryUpdated, categoryResponse);
+		categoryResponse = CategoryResponse.from(categoryUpdated);
 		return ResponseEntity.ok(categoryResponse);
-	}
-
-	private ModelMapper getModelMapper() {
-		return modelMapper;
 	}
 
 	private CategoryService getService() {

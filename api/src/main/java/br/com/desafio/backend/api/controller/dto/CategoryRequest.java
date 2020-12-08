@@ -12,8 +12,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(staticName = "create")
+@AllArgsConstructor(staticName = "create")
 public class CategoryRequest implements Serializable {
 
 	private static final long serialVersionUID = 6230401258560362817L;

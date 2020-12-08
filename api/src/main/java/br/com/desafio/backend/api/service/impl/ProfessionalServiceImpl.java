@@ -17,45 +17,53 @@ import java.util.Optional;
 
 @Service
 public class ProfessionalServiceImpl extends GenericServiceAbstract<ProfessionalEntity, Long>
-        implements ProfessionalService {
+		implements ProfessionalService {
 
-    @Autowired
-    private ProfessionalRepository professionalRepository;
+	@Autowired
+	private ProfessionalRepository professionalRepository;
 
-    @Override
-    public JpaRepository<ProfessionalEntity, Long> getRepository() {
-        return this.professionalRepository;
-    }
+	@Override
+	public JpaRepository<ProfessionalEntity, Long> getRepository() {
+		return this.professionalRepository;
+	}
 
-    @Transactional
-    @Override
-    public ProfessionalEntity createProfessional(ProfessionalEntity professional) {
-        validateProfessionalConstraints(professional);
-        validateProfessionalProperties(professional);
-        Object obj = getRepository().save(professional);
-        return (ProfessionalEntity) obj;
-    }
+	@Transactional
+	@Override
+	public ProfessionalEntity createProfessional(ProfessionalEntity professional) {
+		validateProfessionalCellPhoneConstraint(professional);
+		validateProfessionalEmailConstraint(professional);
+		validateProfessionalProperties(professional);
+		Object obj = getRepository().save(professional);
+		return (ProfessionalEntity) obj;
+	}
 
-    private void validateProfessionalConstraints(ProfessionalEntity professional) {
-        Optional<ProfessionalEntity> optProfessional = professionalRepository
-                .findByCellPhoneOrEmail(professional.getCellPhone(), professional.getEmail());
-        if (optProfessional.isPresent()) {
-            ProfessionalEntity foundProfessional = optProfessional.get();
-            if (professional.getCellPhone().equals(foundProfessional.getCellPhone())) {
-                throw new UniqueConstraintException("Este número de celular já está cadastrado");
-            }
-            if (professional.getEmail().equals(foundProfessional.getEmail())) {
-                throw new UniqueConstraintException("Este email já está cadastrado");
-            }
-        }
-    }
+	private void validateProfessionalCellPhoneConstraint(ProfessionalEntity professional) {
+		Optional<ProfessionalEntity> optProfessional = professionalRepository
+				.findByCellPhone(professional.getCellPhone());
+		if (optProfessional.isPresent()) {
+			ProfessionalEntity foundProfessional = optProfessional.get();
+			if (professional.getCellPhone().equals(foundProfessional.getCellPhone())) {
+				throw new UniqueConstraintException("Este número de celular já está cadastrado");
+			}
+		}
+	}
 
-    private void validateProfessionalProperties(ProfessionalEntity professional) {
-        ValidationResult result = ProfessionalValidator.emailContainsAtSign()
-                .and(ProfessionalValidator.cellPhoneContainsOnlyNumbers())
-                .and(ProfessionalValidator.cellPhoneHasAValidLength()).apply(professional);
-        if (result.getReason().isPresent()) {
-            throw new BadRequestException(result.getReason().get());
-        }
-    }
+	private void validateProfessionalEmailConstraint(ProfessionalEntity professional) {
+		Optional<ProfessionalEntity> optProfessional = professionalRepository.findByEmail(professional.getEmail());
+		if (optProfessional.isPresent()) {
+			ProfessionalEntity foundProfessional = optProfessional.get();
+			if (professional.getEmail().equals(foundProfessional.getEmail())) {
+				throw new UniqueConstraintException("Este email já está cadastrado");
+			}
+		}
+	}
+
+	private void validateProfessionalProperties(ProfessionalEntity professional) {
+		ValidationResult result = ProfessionalValidator.emailContainsAtSign()
+				.and(ProfessionalValidator.cellPhoneContainsOnlyNumbers())
+				.and(ProfessionalValidator.cellPhoneHasAValidLength()).apply(professional);
+		if (result.getReason().isPresent()) {
+			throw new BadRequestException(result.getReason().get());
+		}
+	}
 }
