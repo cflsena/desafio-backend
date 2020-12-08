@@ -42,9 +42,10 @@ public class JobEntity implements Serializable {
 	@Column(name = "description")
 	private String description;
 	
-	@NotBlank
-	@Column(name = "weekend_service")
-	private String weekendService;
+	@NotNull
+	@Convert(converter = BooleanConverter.class)
+	@Column(name = "weekend_service", columnDefinition = "char", length = 1)
+	private Boolean weekendService;
 	
 	@NotNull
 	@Convert(converter = BooleanConverter.class)
