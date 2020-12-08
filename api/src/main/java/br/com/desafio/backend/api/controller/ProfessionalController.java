@@ -35,8 +35,7 @@ public class ProfessionalController {
         ProfessionalResponse professionalResponse = ProfessionalResponse.getInstance();
 
         getModelMapper().map(professional, professionalToSave);
-        Object obj = getService().save(professionalToSave);
-        professionalCreated = (ProfessionalEntity) obj;
+        professionalCreated = getService().createProfessional(professionalToSave);
         getModelMapper().map(professionalCreated, professionalResponse);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(professionalResponse);

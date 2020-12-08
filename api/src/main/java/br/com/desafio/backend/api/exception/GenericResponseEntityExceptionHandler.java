@@ -2,6 +2,7 @@ package br.com.desafio.backend.api.exception;
 
 import br.com.desafio.backend.api.exception.common.ExceptionMessageBuilder;
 import br.com.desafio.backend.api.exception.constant.ApiResponseEntityExceptionConstant;
+import br.com.desafio.backend.api.exception.custom.BadRequestException;
 import br.com.desafio.backend.api.exception.custom.SystemUnavailableException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +51,14 @@ public class GenericResponseEntityExceptionHandler extends ResponseEntityExcepti
                         getExceptionMessageBuilder().getUserMessage(ApiResponseEntityExceptionConstant.SYSTEM_UNAVAILABLE),
                         ExceptionUtils.getRootCauseMessage(ex)),
                 new HttpHeaders(), HttpStatus.SERVICE_UNAVAILABLE, request);
+    }
+
+    @ExceptionHandler({BadRequestException.class})
+    public ResponseEntity<Object> handleBadRequestException(BadRequestException ex, WebRequest request) {
+        return handleExceptionInternal(ex,
+                getExceptionMessageBuilder().buildErrorApi(HttpStatus.BAD_REQUEST,
+                        ex.getMessage(),
+                        ExceptionUtils.getRootCauseMessage(ex)),
+                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 }

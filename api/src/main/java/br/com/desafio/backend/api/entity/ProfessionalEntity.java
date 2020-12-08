@@ -37,7 +37,7 @@ public class ProfessionalEntity implements Serializable {
 
     @NotBlank
     @Column(name = "cell_phone", unique = true)
-    @Size(min = 11, max = 11)
+    @Size(min = 10, max = 11)
     private String cellPhone;
 
 }

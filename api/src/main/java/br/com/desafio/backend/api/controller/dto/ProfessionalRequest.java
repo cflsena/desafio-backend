@@ -23,6 +23,6 @@ public class ProfessionalRequest implements Serializable {
 	@NotBlank
 	private String email;
 
-	@Size(min = 11, max = 11)
+	@NotBlank
 	private String cellPhone;
 }
