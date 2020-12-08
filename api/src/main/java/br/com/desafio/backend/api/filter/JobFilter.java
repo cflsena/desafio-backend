@@ -1,6 +1,7 @@
 package br.com.desafio.backend.api.filter;
 
 import br.com.desafio.backend.api.entity.CategoryEntity;
+import br.com.desafio.backend.api.repository.custom.paginator.PaginationCustom;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,11 +13,10 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class JobFilter implements Serializable {
+public class JobFilter extends PaginationCustom implements Serializable {
     private static final long serialVersionUID = 1865432684532L;
 
-    private Long id;
-    private CategoryEntity category;
+    private Long categoryId;
     private String description;
     private Boolean weekendService;
     private Boolean active;
