@@ -4,6 +4,8 @@ import br.com.desafio.backend.api.controller.dto.ProfessionalRequest;
 import br.com.desafio.backend.api.controller.dto.ProfessionalResponse;
 import br.com.desafio.backend.api.entity.ProfessionalEntity;
 import br.com.desafio.backend.api.service.ProfessionalService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/profissionais")
+@Tag(name = "Profissionais", description = "API de Profissionais")
 public class ProfessionalController {
 
     @Autowired
@@ -25,6 +28,7 @@ public class ProfessionalController {
     @Autowired
     private ProfessionalService professionalService;
 
+    @Operation(summary = "Criar um novo profissional", description = "", tags = { "professional" })
     @PostMapping
     public ResponseEntity<ProfessionalResponse> createProfessional(
             @Valid @RequestBody ProfessionalRequest professional) {

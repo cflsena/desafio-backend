@@ -7,6 +7,8 @@ import br.com.desafio.backend.api.entity.JobEntity;
 import br.com.desafio.backend.api.filter.JobFilter;
 import br.com.desafio.backend.api.repository.custom.paginator.PageCustom;
 import br.com.desafio.backend.api.service.JobService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/servicos")
+@Tag(name = "Serviços", description = "API de Serviços")
 public class JobController {
 
     @Autowired
@@ -29,6 +32,7 @@ public class JobController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Retornar um serviço cadastrado pelo id", description = "", tags = {"job"})
     public ResponseEntity<JobResponse> getJobById(@PathVariable("id") Long id) {
         Optional<JobEntity> op = getService().findById(id);
         if (op.isPresent()) {
@@ -42,6 +46,8 @@ public class JobController {
 
     @GetMapping("/filtro")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Retorna todos os serviços cadastrados, utilizando os atributos do DTO JobFilter como filtro",
+            description = "Lista de serviços paginadas", tags = {"job"})
     public ResponseEntity<PageCustom> getJobByFilter(JobFilter filter) {
         PageCustom jobPageCustom = getService().findJobByFilter(filter);
         if (jobPageCustom != null && jobPageCustom.getListObject().size() > 0) {
@@ -52,6 +58,7 @@ public class JobController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Criar um novo serviço", description = "", tags = {"job"})
     public ResponseEntity<JobResponse> createJob(
             @Valid @RequestBody JobRequest job) {
 
@@ -67,6 +74,7 @@ public class JobController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Atualizar as propriedades de um serviço pelo id", description = "", tags = {"job"})
     public ResponseEntity<JobResponse> updateJob(@PathVariable("id") Long id, @Valid @RequestBody JobRequest job) {
         JobEntity jobToUpdate = JobEntity.getInstance();
         JobResponse jobResponse = JobResponse.getInstance();
@@ -79,6 +87,7 @@ public class JobController {
 
     @PatchMapping("/{id}/status")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Atualizar o status de um serviço pelo id", description = "", tags = {"job"})
     public void updateActiveProperty(@PathVariable Long id, @Valid @RequestBody JobStatusRequest jobStatus,
                                      HttpServletResponse response) {
         getService().updateJobStatus(jobStatus.getActive(), id);
@@ -86,6 +95,7 @@ public class JobController {
 
     @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Excluir um serviço pelo id", description = "", tags = {"job"})
     protected void delete(@PathVariable("id") Long id) {
         getService().deleteById(id);
     }

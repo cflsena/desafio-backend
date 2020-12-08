@@ -2,6 +2,7 @@ package br.com.desafio.backend.api.controller.dto;
 
 import java.io.Serializable;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,13 @@ public class ProfessionalResponse implements Serializable {
         return new ProfessionalResponse();
     }
 
+    @Schema(description = "Campo texto para o nome completo do profissional", example = "Fulano Beltrano", required = true)
     private String name;
+
+    @Schema(description = "Campo texto para o email do profissional", example = "teste@teste.com", required = true)
     private String email;
+
+    @Schema(description = "Campo texto (porém, apenas números) para o celular do profissional", example = "12345678910", required = true)
     private String cellPhone;
 
 }
