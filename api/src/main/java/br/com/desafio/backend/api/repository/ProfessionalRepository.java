@@ -1,11 +1,11 @@
 package br.com.desafio.backend.api.repository;
 
-import br.com.desafio.backend.api.entity.ProfessionalEntity;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import br.com.desafio.backend.api.entity.ProfessionalEntity;
 
 @Repository
 public interface ProfessionalRepository extends JpaRepository<ProfessionalEntity, Long> {

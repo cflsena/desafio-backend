@@ -1,13 +1,7 @@
 package br.com.desafio.backend.api.exception;
 
-import br.com.desafio.backend.api.exception.common.ExceptionMessageBuilder;
-import br.com.desafio.backend.api.exception.constant.ApiResponseEntityExceptionConstant;
-import br.com.desafio.backend.api.exception.custom.BadRequestException;
-import br.com.desafio.backend.api.exception.custom.SystemUnavailableException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +11,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import br.com.desafio.backend.api.exception.common.ExceptionMessageBuilder;
+import br.com.desafio.backend.api.exception.constant.ApiResponseEntityExceptionConstant;
+import br.com.desafio.backend.api.exception.custom.BadRequestException;
+import br.com.desafio.backend.api.exception.custom.SystemUnavailableException;
 
 @ControllerAdvice
 public class GenericResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
