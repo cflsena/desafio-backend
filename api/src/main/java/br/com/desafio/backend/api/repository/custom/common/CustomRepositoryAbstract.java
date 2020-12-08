@@ -50,7 +50,6 @@ public abstract class CustomRepositoryAbstract {
         }
         if (count <= 0) {
             pageCustomResult.setListObject(new ArrayList<>());
-            return;
         }
     }
 

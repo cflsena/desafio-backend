@@ -1,6 +1,5 @@
 package br.com.desafio.backend.api.filter;
 
-import br.com.desafio.backend.api.entity.CategoryEntity;
 import br.com.desafio.backend.api.repository.custom.paginator.PaginationCustom;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
