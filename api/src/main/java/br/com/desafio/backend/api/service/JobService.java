@@ -4,5 +4,5 @@ import br.com.desafio.backend.api.entity.JobEntity;
 import br.com.desafio.backend.api.service.common.interfaces.GenericService;
 
 public interface JobService extends GenericService<JobEntity, Long>{
-
+    void updateJobStatus(Boolean status, Long id);
 }

@@ -19,4 +19,9 @@ public class JobServiceImpl extends GenericServiceAbstract<JobEntity, Long> impl
 	public JpaRepository<JobEntity, Long> getRepository() {
 		return jobRepository;
 	}
+
+	@Override
+	public void updateJobStatus(Boolean status, Long id) {
+
+	}
 }
