@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Getter
@@ -14,6 +15,7 @@ import java.io.Serializable;
 public class JobStatusRequest implements Serializable {
     private static final long serialVersionUID = 4901565620249501533L;
 
+    @NotNull
     private Boolean active;
 
 }
