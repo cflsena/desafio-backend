@@ -11,17 +11,13 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode(of="id")
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor(staticName = "create")
+@NoArgsConstructor(staticName = "create")
 @Entity
 @Table(name = "Job", uniqueConstraints = { @UniqueConstraint(columnNames = {"category_id"}) })
 public class JobEntity implements Serializable {
 
 	private static final long serialVersionUID = -8515263941998390820L;
-	
-	public static JobEntity getInstance() {
-		return new JobEntity();
-	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

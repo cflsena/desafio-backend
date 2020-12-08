@@ -10,17 +10,13 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor(staticName = "create")
+@NoArgsConstructor(staticName = "create")
 @Entity
 @Table(name = "Professional")
 public class ProfessionalEntity implements Serializable {
 
     private static final long serialVersionUID = -9066598081196681838L;
-
-    public static ProfessionalEntity getInstance() {
-        return new ProfessionalEntity();
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -15,22 +15,20 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor(staticName = "create")
+@NoArgsConstructor(staticName = "create")
 @Entity
 @Table(name = "Category")
+@ToString
 public class CategoryEntity implements Serializable {
 
 	private static final long serialVersionUID = -1861766955648495332L;
 	
-	public static CategoryEntity getInstance() {
-		return new CategoryEntity();
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
