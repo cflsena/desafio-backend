@@ -4,6 +4,8 @@ import br.com.desafio.backend.api.controller.dto.JobRequest;
 import br.com.desafio.backend.api.controller.dto.JobResponse;
 import br.com.desafio.backend.api.controller.dto.JobStatusRequest;
 import br.com.desafio.backend.api.entity.JobEntity;
+import br.com.desafio.backend.api.filter.JobFilter;
+import br.com.desafio.backend.api.repository.custom.paginator.PageCustom;
 import br.com.desafio.backend.api.service.JobService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,23 +27,6 @@ public class JobController {
     @Autowired
     private JobService jobService;
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<JobResponse> createJob(
-            @Valid @RequestBody JobRequest job) {
-
-        JobEntity jobCreated;
-        JobEntity jobToSave = JobEntity.getInstance();
-        JobResponse jobResponse = JobResponse.getInstance();
-
-        getModelMapper().map(job, jobToSave);
-        Object obj = getService().save(jobToSave);
-        jobCreated = (JobEntity) obj;
-        getModelMapper().map(jobCreated, jobResponse);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(jobResponse);
-    }
-
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<JobResponse> getJobById(@PathVariable("id") Long id) {
@@ -55,15 +40,39 @@ public class JobController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/filtro")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<PageCustom> getJobByFilter(JobFilter filter) {
+        PageCustom jobPageCustom = getService().findJobByFilter(filter);
+        if (jobPageCustom != null && jobPageCustom.getListObject().size() > 0) {
+            return ResponseEntity.ok(jobPageCustom);
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<JobResponse> createJob(
+            @Valid @RequestBody JobRequest job) {
+
+        JobEntity jobToSave = JobEntity.getInstance();
+        JobResponse jobResponse = JobResponse.getInstance();
+
+        getModelMapper().map(job, jobToSave);
+        JobEntity jobCreated = getService().createJob(jobToSave);
+        getModelMapper().map(jobCreated, jobResponse);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(jobResponse);
+    }
+
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<JobResponse> updateJob(@PathVariable("id") Long id, @Valid @RequestBody JobRequest job) {
-        JobEntity jobUpdated;
         JobEntity jobToUpdate = JobEntity.getInstance();
         JobResponse jobResponse = JobResponse.getInstance();
         getModelMapper().map(job, jobToUpdate);
-        Object obj = getService().save(jobToUpdate);
-        jobUpdated = (JobEntity) obj;
+        Object obj = getService().update(jobToUpdate, id);
+        JobEntity jobUpdated = (JobEntity) obj;
         getModelMapper().map(jobUpdated, jobResponse);
         return ResponseEntity.ok(jobResponse);
     }

@@ -6,6 +6,7 @@ import br.com.desafio.backend.api.repository.custom.paginator.PageCustom;
 import br.com.desafio.backend.api.service.common.interfaces.GenericService;
 
 public interface JobService extends GenericService<JobEntity, Long>{
+    JobEntity createJob(JobEntity job);
     void updateJobStatus(Boolean status, Long id);
-    PageCustom findJobByFilter(JobFilter job);
+    PageCustom findJobByFilter(JobFilter filter);
 }

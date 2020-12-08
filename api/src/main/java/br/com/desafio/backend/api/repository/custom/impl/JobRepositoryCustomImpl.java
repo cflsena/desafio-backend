@@ -53,13 +53,11 @@ public class JobRepositoryCustomImpl extends CustomRepositoryAbstract implements
         }
 
         if (jobFilter.getWeekendService() != null) {
-            String weekendServiceFlag = jobFilter.getWeekendService() ? "S" : "N";
-            predicateList.add(criteriaBuilder.equal(root.get("weekendService"), weekendServiceFlag));
+            predicateList.add(criteriaBuilder.equal(root.get("weekendService"), jobFilter.getWeekendService()));
         }
 
         if (jobFilter.getActive() != null) {
-            String activeFlag = jobFilter.getWeekendService() ? "S" : "N";
-            predicateList.add(criteriaBuilder.equal(root.get("active"), activeFlag));
+            predicateList.add(criteriaBuilder.equal(root.get("active"), jobFilter.getActive()));
         }
 
         return predicateList.toArray(new Predicate[predicateList.size()]);

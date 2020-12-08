@@ -5,6 +5,7 @@ import br.com.desafio.backend.api.exception.constant.ApiResponseEntityExceptionC
 import br.com.desafio.backend.api.exception.custom.UniqueConstraintException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -33,8 +34,18 @@ public class SqlResponseEntityExceptionHandler extends ResponseEntityExceptionHa
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
+    @ExceptionHandler({DataIntegrityViolationException.class})
+    public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex,
+                                                                        WebRequest request) {
+        return handleExceptionInternal(ex,
+                getExceptionMessageBuilder().buildErrorApi(HttpStatus.BAD_REQUEST,
+                        getExceptionMessageBuilder().getUserMessage(ApiResponseEntityExceptionConstant.OPERATION_NOT_PERMITTED),
+                        ExceptionUtils.getRootCauseMessage(ex)),
+                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
     @ExceptionHandler({UniqueConstraintException.class})
-    public ResponseEntity<Object> handleDataIntegrityViolationException(UniqueConstraintException ex, WebRequest request) {
+    public ResponseEntity<Object> handleUniqueConstraintException(UniqueConstraintException ex, WebRequest request) {
         return handleExceptionInternal(ex,
                 getExceptionMessageBuilder().buildErrorApi(HttpStatus.BAD_REQUEST,
                         ex.getMessage(),

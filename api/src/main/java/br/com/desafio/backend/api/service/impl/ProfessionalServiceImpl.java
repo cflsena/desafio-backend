@@ -11,6 +11,7 @@ import br.com.desafio.backend.api.validation.common.ValidationResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class ProfessionalServiceImpl extends GenericServiceAbstract<Professional
         return this.professionalRepository;
     }
 
-
+    @Transactional
     @Override
     public ProfessionalEntity createProfessional(ProfessionalEntity professional) {
         validateProfessionalConstraints(professional);
