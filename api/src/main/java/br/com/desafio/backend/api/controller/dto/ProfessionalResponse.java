@@ -10,15 +10,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor(staticName = "create")
+@NoArgsConstructor(staticName = "create")
 public class ProfessionalResponse implements Serializable {
 
     private static final long serialVersionUID = 5514262027028063685L;
-
-    public static ProfessionalResponse getInstance() {
-        return new ProfessionalResponse();
-    }
 
     @Schema(description = "Campo texto para o nome completo do profissional", example = "Fulano Beltrano", required = true)
     private String name;

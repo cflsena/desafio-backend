@@ -12,15 +12,11 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor(staticName = "create")
+@NoArgsConstructor(staticName = "create")
 public class JobResponse implements Serializable {
 
     private static final long serialVersionUID = -9134195187967739614L;
-
-    public static JobResponse getInstance() {
-        return new JobResponse();
-    }
 
     @Schema(description = "Identificador único para o Profissional relacionado ao serviço", example = "1", required = true)
     private ProfessionalEntity professional;
