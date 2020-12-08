@@ -9,13 +9,11 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class ProfessionalRequest implements Serializable {
+@AllArgsConstructor
+public class JobStatusRequest implements Serializable {
+    private static final long serialVersionUID = 4901565620249501533L;
 
-	private static final long serialVersionUID = 5676116390421714288L;
+    private Boolean active;
 
-	private String name;
-	private String email;
-	private String cellPhone;
 }

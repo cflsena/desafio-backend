@@ -2,6 +2,7 @@ package br.com.desafio.backend.api.controller;
 
 import br.com.desafio.backend.api.controller.dto.JobRequest;
 import br.com.desafio.backend.api.controller.dto.JobResponse;
+import br.com.desafio.backend.api.controller.dto.JobStatusRequest;
 import br.com.desafio.backend.api.entity.JobEntity;
 import br.com.desafio.backend.api.service.JobService;
 import org.modelmapper.ModelMapper;
@@ -67,11 +68,11 @@ public class JobController {
         return ResponseEntity.ok(jobResponse);
     }
 
-    @PatchMapping("/{id}/ativo")
+    @PatchMapping("/{id}/status")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateActiveProperty(@PathVariable Long id, @Valid @RequestBody Boolean status,
+    public void updateActiveProperty(@PathVariable Long id, @Valid @RequestBody JobStatusRequest jobStatus,
                                      HttpServletResponse response) {
-        getService().updateJobStatus(status, id);
+        getService().updateJobStatus(jobStatus.getActive(), id);
     }
 
     @DeleteMapping(path = "/{id}")
