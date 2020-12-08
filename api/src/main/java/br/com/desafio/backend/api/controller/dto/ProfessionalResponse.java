@@ -2,25 +2,25 @@ package br.com.desafio.backend.api.controller.dto;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProfessionalResponse implements Serializable {
 
-	private static final long serialVersionUID = 5514262027028063685L;
+    private static final long serialVersionUID = 5514262027028063685L;
 
-	public static ProfessionalResponse getInstance() {
-		return new ProfessionalResponse();
-	}
+    public static ProfessionalResponse getInstance() {
+        return new ProfessionalResponse();
+    }
 
-	@Getter
-	@Setter
-	private String name;
-	@Getter
-	@Setter
-	private String email;
-	@Getter
-	@Setter
-	private String cellPhone;
+    private String name;
+    private String email;
+    private String cellPhone;
 
 }
