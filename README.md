@@ -62,14 +62,14 @@
 
 ## APIs REST
 - Base url: hhtp://localhost:8080/desafio-backend/api/v1
-- Documentação disponível em (ao startar o projeto): [http://localhost:8080/dock-tech/api/v1/documentation.html](http://localhost:8080/dock-tech/api/v1/documentation.html)
+- Documentação disponível em (ao startar o projeto): [http://localhost:8080/desafio-backend/api/v1/documentation.html](http://localhost:8080/desafio-backend/api/v1/documentation.html)
 
 ## Outras informações
 **Banco de Dados**
 - Arquivo sql executado contendo inserções iniciais ao startar o projeto: 
 	- **data.sql**
 	- Acessando o console do banco de dados H2:
-		- url: [http://localhost:8080/dock-tech/api/v1/h2](http://localhost:8080/dock-tech/api/v1/h2)
+		- url: [http://localhost:8080/desafio-backend/api/v1/h2](http://localhost:8080/desafio-backend/api/v1/h2)
 		- Driver Class: org.h2.Driver
 		- JDBC Url: jdbc:h2:mem:testdb
 		- User Name: springboottest
