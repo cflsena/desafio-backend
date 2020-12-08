@@ -70,7 +70,7 @@ public class JobController {
 
     @PatchMapping("/{id}/status")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateActiveProperty(@PathVariable Long id, @RequestBody JobStatusRequest jobStatus,
+    public void updateActiveProperty(@PathVariable Long id, @Valid @RequestBody JobStatusRequest jobStatus,
                                      HttpServletResponse response) {
         getService().updateJobStatus(jobStatus.getActive(), id);
     }
