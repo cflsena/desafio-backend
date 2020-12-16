@@ -23,7 +23,7 @@
 | professional_id | Numérico |
 | category_id | Numérico |
 | description | Texto |
-| weekendService | Texto | 
+| weekend_service | Texto | 
 | active | Texto |
 | references | Texto |
 
