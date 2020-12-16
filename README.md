@@ -16,7 +16,6 @@
 | cell_phone | Texto |
 
 - **Job**
-	- Adicionei dois novos campos: tipoTransacao e tipoConta
 
 | Nome Coluna | Tipos |
 |--|--|
